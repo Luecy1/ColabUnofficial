@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
-
 
 class EventListFragment : Fragment() {
 
@@ -35,23 +35,11 @@ class EventListFragment : Fragment() {
 
         eventList.adapter = groupAdapter
 
-        val itemList = listOf(
-            EventListItem("ああああ"),
-            EventListItem("いいいい"),
-            EventListItem("うううう"),
-            EventListItem("ええええ"),
-            EventListItem("おおおお")
-        ).toMutableList()
+        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer { eventList ->
+            groupAdapter.update(eventList)
+        })
 
-        groupAdapter.update(
-            itemList
-        )
-
-        groupAdapter.setOnItemClickListener { _, _ ->
-            itemList.add(EventListItem("おおおお"))
-
-            groupAdapter.update(itemList)
-        }
+        viewModel.loadData()
     }
 
 }
