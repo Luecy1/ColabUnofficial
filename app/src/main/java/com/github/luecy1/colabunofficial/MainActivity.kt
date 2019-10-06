@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             itemList
         )
 
-        groupAdapter.setOnItemClickListener { item, view ->
+        groupAdapter.setOnItemClickListener { _, _ ->
             itemList.add(TextItem("おおおお"))
 
             groupAdapter.update(itemList)
@@ -40,12 +40,14 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class TextItem(val text: String) : BindableItem<EventCardItemBinding>() {
+class TextItem(private val text: String) : BindableItem<EventCardItemBinding>() {
     override fun getLayout() = R.layout.event_card_item
 
     override fun bind(binding: EventCardItemBinding, position: Int) {
         binding.title.text = text
         binding.catchId.text = "最前線のデータサイエンティストに学ぶ実践型勉強会"
         binding.description.text = "サポーターズが贈るエンジニア勉強会。今回のテーマは「今更聞けない機械学習の基礎と応用」。"
+        binding.date.text = "02/22"
+        binding.acceptedAndLimit.text = "50/50"
     }
 }
