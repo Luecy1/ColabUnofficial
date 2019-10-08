@@ -13,17 +13,13 @@ class EventListViewModel : ViewModel() {
 
     val eventLiveData: LiveData<List<EventListItem>> = _eventLiveData
 
+    private val eventListHolder = mutableListOf<EventListItem>()
 
     fun loadData() {
         val eventList = eventRepository.getEventList()
 
-        val list = mutableListOf<EventListItem>()
+        eventListHolder += eventList.map { it.toEventListItem() }
 
-        for (event in eventList) {
-            val eventListItem = EventListItem(event.title)
-            list.add(eventListItem)
-        }
-
-        _eventLiveData.postValue(list)
+        _eventLiveData.postValue(eventListHolder)
     }
 }

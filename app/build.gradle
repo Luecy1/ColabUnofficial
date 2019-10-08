@@ -41,6 +41,14 @@ dependencies {
     implementation "com.xwray:groupie:2.6.0"
     implementation 'com.xwray:groupie-databinding:2.6.0'
 
+    def retrofit_version = '2.6.2'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+
+    def moshi_version = '1.8.0'
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
     def koin_version = '2.1.0-alpha-1'
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-core-ext:$koin_version"
