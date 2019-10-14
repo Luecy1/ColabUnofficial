@@ -2,7 +2,7 @@ package com.github.luecy1.colabunofficial.model
 
 import com.squareup.moshi.Json
 
-data class Json(
+data class SupporterzColabResponce(
 
     @Json(name = "results_returned")
     val resultsReturned: Int,
