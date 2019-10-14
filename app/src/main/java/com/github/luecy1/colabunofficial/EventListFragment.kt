@@ -6,19 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class EventListFragment : Fragment() {
+
+    private val viewModel: EventListViewModel by viewModel()
 
     companion object {
         fun newInstance() = EventListFragment()
         val TAG: String = EventListFragment::class.java.simpleName
     }
-
-    private lateinit var viewModel: EventListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,6 @@ class EventListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(EventListViewModel::class.java)
 
         val groupAdapter = GroupAdapter<GroupieViewHolder>()
 

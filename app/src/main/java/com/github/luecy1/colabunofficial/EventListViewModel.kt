@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 
-class EventListViewModel : ViewModel() {
-
-    private val eventRepository = EventListRepository()
+class EventListViewModel(
+    private val eventRepository: EventListRepository
+) : ViewModel() {
 
     private val _eventLiveData = MediatorLiveData<List<EventListItem>>()
 
