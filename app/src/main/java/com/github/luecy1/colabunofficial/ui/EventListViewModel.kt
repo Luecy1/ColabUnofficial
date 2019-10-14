@@ -1,9 +1,10 @@
-package com.github.luecy1.colabunofficial
+package com.github.luecy1.colabunofficial.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.luecy1.colabunofficial.EventListRepository
 import kotlinx.coroutines.launch
 
 

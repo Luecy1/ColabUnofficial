@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial
+package com.github.luecy1.colabunofficial.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.github.luecy1.colabunofficial.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
