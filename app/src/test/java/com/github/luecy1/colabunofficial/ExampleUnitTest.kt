@@ -1,7 +1,6 @@
 package com.github.luecy1.colabunofficial
 
-import com.github.luecy1.colabunofficial.ui.date.toMMDD
-import com.soywiz.klock.DateFormat
+import com.github.luecy1.colabunofficial.util.toMMDD
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

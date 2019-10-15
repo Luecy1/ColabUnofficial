@@ -3,7 +3,7 @@ package com.github.luecy1.colabunofficial.ui
 import com.github.luecy1.colabunofficial.R
 import com.github.luecy1.colabunofficial.databinding.EventCardItemBinding
 import com.github.luecy1.colabunofficial.model.Event
-import com.github.luecy1.colabunofficial.ui.date.toMMDD
+import com.github.luecy1.colabunofficial.util.toMMDD
 import com.xwray.groupie.databinding.BindableItem
 
 class EventListItem(

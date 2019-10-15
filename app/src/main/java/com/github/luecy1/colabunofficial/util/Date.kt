@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial.ui.date
+package com.github.luecy1.colabunofficial.util
 
 import com.soywiz.klock.DateException
 import com.soywiz.klock.DateFormat
