@@ -30,11 +30,17 @@ fun Event.toEventListItem(): EventListItem {
 
     val accepted = "${this.accepted}/${this.limit}"
 
+    val description = this.description.eraseHtml().take(100).toString()
+
     return EventListItem(
         this.title,
         this.catch,
-        this.description,
+        description,
         date,
         accepted
     )
 }
+
+private fun CharSequence.eraseHtml(): CharSequence = this
+    .replace("</?[^>]+?>".toRegex(), "")
+    .replace("\n", " ")
