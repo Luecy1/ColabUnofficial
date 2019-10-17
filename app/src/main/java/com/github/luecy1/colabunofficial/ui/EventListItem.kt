@@ -28,9 +28,18 @@ fun Event.toEventListItem(): EventListItem {
 
     val date = this.startedAt.toMMDD()
 
-    val accepted = "${this.accepted}/${this.limit}"
+    val accepted = if (this.limit != null) {
+        "${this.accepted}/${this.limit}"
+    } else {
+        "${this.accepted}"
+    }
 
-    val description = this.description.eraseHtml().take(100).toString()
+    val eraseHtml = this.description.eraseHtml()
+    val description = if (eraseHtml.length > 150) {
+        eraseHtml.take(150).toString() + "..."
+    } else {
+        eraseHtml.toString()
+    }
 
     return EventListItem(
         this.title,
