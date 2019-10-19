@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.luecy1.colabunofficial.R
+import com.github.luecy1.colabunofficial.util.isNetworkState
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -44,7 +45,12 @@ class EventListFragment : Fragment() {
             Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
         })
 
-        viewModel.loadData()
+
+        if (requireContext().isNetworkState()) {
+            viewModel.loadData()
+        } else {
+            Snackbar.make(requireView(), "Can'nt connect Network", Snackbar.LENGTH_LONG).show()
+        }
     }
 
 }
