@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.luecy1.colabunofficial.R
+import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
@@ -37,6 +38,10 @@ class EventListFragment : Fragment() {
 
         viewModel.eventLiveData.observe(viewLifecycleOwner, Observer { eventList ->
             groupAdapter.update(eventList)
+        })
+
+        viewModel.message.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
         })
 
         viewModel.loadData()
