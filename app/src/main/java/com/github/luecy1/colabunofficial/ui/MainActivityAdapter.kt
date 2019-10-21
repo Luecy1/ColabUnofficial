@@ -14,7 +14,11 @@ class MainActivityAdapter(
     private val tabTitles = arrayOf("Event", "Search")
 
     override fun getItem(position: Int): Fragment {
-        return EventListFragment.newInstance()
+        return when (position) {
+            0 -> EventListFragment.newInstance()
+            1 -> SearchEventFragment.newInstance()
+            else -> throw IllegalAccessException("Unexpected position->$position")
+        }
     }
 
     override fun getCount(): Int {

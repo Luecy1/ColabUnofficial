@@ -11,15 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        if (savedInstanceState == null) {
-//            val eventListFragment = EventListFragment.newInstance()
-//            supportFragmentManager.beginTransaction()
-//                .add(R.id.fragment_container_view, eventListFragment, EventListFragment.TAG)
-//                .commit()
-//        }
-
-//        setSupportActionBar(toolbar)
-
         val adapter = MainActivityAdapter(supportFragmentManager)
 
         viewPager.offscreenPageLimit = 2
@@ -27,5 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         tabLayout.setupWithViewPager(viewPager)
 
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_list_black_24dp)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_search_black_24dp)
     }
 }
