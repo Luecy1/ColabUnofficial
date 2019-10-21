@@ -38,7 +38,8 @@ class EventListFragment : Fragment() {
         eventList.adapter = groupAdapter
 
         viewModel.eventLiveData.observe(viewLifecycleOwner, Observer { eventList ->
-            groupAdapter.update(eventList)
+            val eventListItem = eventList.map { it.toEventListItem() }
+            groupAdapter.update(eventListItem)
         })
 
         viewModel.message.observe(viewLifecycleOwner, Observer {

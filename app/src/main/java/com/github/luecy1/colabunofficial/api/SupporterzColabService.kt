@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface SupporterzColabService {
 
     @GET("api/v1/event/")
-    suspend fun eventList(): Response<SupporterzColabResponce>
+    suspend fun eventList(): SupporterzColabResponce
 
 }
