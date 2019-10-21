@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.luecy1.colabunofficial.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.event_list_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,13 +11,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            val eventListFragment = EventListFragment.newInstance()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_view, eventListFragment, EventListFragment.TAG)
-                .commit()
-        }
+//        if (savedInstanceState == null) {
+//            val eventListFragment = EventListFragment.newInstance()
+//            supportFragmentManager.beginTransaction()
+//                .add(R.id.fragment_container_view, eventListFragment, EventListFragment.TAG)
+//                .commit()
+//        }
 
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
+
+        val adapter = MainActivityAdapter(supportFragmentManager)
+
+        viewPager.offscreenPageLimit = 2
+        viewPager.adapter = adapter
+
+        tabLayout.setupWithViewPager(viewPager)
+
     }
 }
