@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.luecy1.colabunofficial.R
+import com.github.luecy1.colabunofficial.databinding.EventListFragmentBinding
 import com.github.luecy1.colabunofficial.util.isNetworkState
 import com.google.android.material.snackbar.Snackbar
+import com.wada811.databinding.dataBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
@@ -17,6 +19,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class EventListFragment : Fragment() {
 
     private val viewModel: EventListViewModel by viewModel()
+
+    private val binding: EventListFragmentBinding by dataBinding(R.layout.event_list_fragment)
 
     companion object {
         fun newInstance() = EventListFragment()
@@ -27,7 +31,8 @@ class EventListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.event_list_fragment, container, false)
+        binding.viewmodel = viewModel
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,7 +50,6 @@ class EventListFragment : Fragment() {
         viewModel.message.observe(viewLifecycleOwner, Observer {
             Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
         })
-
 
         if (requireContext().isNetworkState()) {
             viewModel.loadData()

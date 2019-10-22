@@ -22,14 +22,22 @@ class EventListViewModel(
     private val _message = MediatorLiveData<String>()
     val message: LiveData<String> = _message
 
+    val loading = MediatorLiveData<Boolean>().apply {
+        setValue(true)
+    }
+
     fun loadData() = viewModelScope.launch {
 
+        loading.value = true
         runCatching {
             eventRepository.getEventList()
         }.onSuccess {
             _eventLiveData.postValue(it)
+            loading.value = false
         }.onFailure {
             _message.value = "Failure"
+
+            loading.value = false
             Log.e(TAG, "Failure", it)
         }
     }
