@@ -2,12 +2,12 @@ package com.github.luecy1.colabunofficial.di
 
 import com.github.luecy1.colabunofficial.repository.EventListRepository
 import com.github.luecy1.colabunofficial.ui.EventListViewModel
-import com.github.luecy1.colabunofficial.api.supporterzColabServiceFactory
+import com.github.luecy1.colabunofficial.api.supporterzColabAPIFactory
 import org.koin.dsl.module
 
 val supporterzColabModule = module {
 
-    single { supporterzColabServiceFactory() }
+    single { supporterzColabAPIFactory() }
 
     factory { EventListRepository(get()) }
 

@@ -1,11 +1,11 @@
 package com.github.luecy1.colabunofficial.repository
 
-import com.github.luecy1.colabunofficial.api.SupporterzColabService
+import com.github.luecy1.colabunofficial.api.SupporterzColabAPI
 import com.github.luecy1.colabunofficial.model.Event
 
 class EventListRepository(
-    private val service: SupporterzColabService
+    private val api: SupporterzColabAPI
 ) {
 
-    suspend fun getEventList(): List<Event> = service.eventList().events
+    suspend fun getEventList(): List<Event> = api.eventList().events
 }

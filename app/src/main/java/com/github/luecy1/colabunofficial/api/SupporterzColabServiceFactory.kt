@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-fun supporterzColabServiceFactory(): SupporterzColabService {
+fun supporterzColabAPIFactory(): SupporterzColabAPI {
 
     val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -17,5 +17,5 @@ fun supporterzColabServiceFactory(): SupporterzColabService {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    return retrofit.create<SupporterzColabService>(SupporterzColabService::class.java)
+    return retrofit.create<SupporterzColabAPI>(SupporterzColabAPI::class.java)
 }

@@ -1,12 +1,14 @@
 package com.github.luecy1.colabunofficial.api
 
 import com.github.luecy1.colabunofficial.model.SupporterzColabResponce
-import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-interface SupporterzColabService {
+interface SupporterzColabAPI {
 
     @GET("api/v1/event/")
-    suspend fun eventList(): SupporterzColabResponce
+    suspend fun eventList(
+        @Query("start") start: Int = 1
+    ): SupporterzColabResponce
 
 }
