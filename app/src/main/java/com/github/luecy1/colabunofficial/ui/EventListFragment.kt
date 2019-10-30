@@ -56,6 +56,8 @@ class EventListFragment : Fragment() {
         } else {
             Snackbar.make(requireView(), "Can'nt connect Network", Snackbar.LENGTH_LONG).show()
         }
+
+        val db = eventList
     }
 
 }
