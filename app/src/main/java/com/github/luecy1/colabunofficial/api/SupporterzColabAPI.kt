@@ -8,7 +8,9 @@ interface SupporterzColabAPI {
 
     @GET("api/v1/event/")
     suspend fun eventList(
-        @Query("start") start: Int = 1
+        @Query("start") start: Int,
+        @Query("order") order: Int,
+        @Query("count") count: Int
     ): SupporterzColabResponce
 
 }

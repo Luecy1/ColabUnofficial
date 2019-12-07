@@ -14,6 +14,7 @@ class EventListViewModel(
     private val eventRepository: EventListRepository
 ) : ViewModel() {
 
+    @Suppress("PrivatePropertyName")
     private val TAG: String = EventListViewModel::class.java.simpleName
 
     private val _eventLiveData = MediatorLiveData<List<Event>>()
@@ -30,7 +31,7 @@ class EventListViewModel(
 
         loading.value = true
         runCatching {
-            eventRepository.getEventList()
+            eventRepository.getEventList(1)
         }.onSuccess {
             _eventLiveData.postValue(it)
             loading.value = false

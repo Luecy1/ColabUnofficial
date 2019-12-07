@@ -1,6 +1,7 @@
 package com.github.luecy1.colabunofficial.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.luecy1.colabunofficial.R
 import com.github.luecy1.colabunofficial.databinding.EventListFragmentBinding
-import com.github.luecy1.colabunofficial.util.isNetworkState
-import com.google.android.material.snackbar.Snackbar
 import com.wada811.databinding.dataBinding
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.event_list_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -38,24 +35,15 @@ class EventListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val groupAdapter = GroupAdapter<GroupieViewHolder>()
+        val adapter = EventListAdapter()
+        eventList.adapter = adapter
 
-        eventList.adapter = groupAdapter
-
-        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer { eventList ->
-            val eventListItem = eventList.map { it.toEventListItem() }
-            groupAdapter.update(eventListItem)
+        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, it.toString())
+            adapter.updateEventModels(it.map { it.toEventModel() })
         })
 
-        viewModel.message.observe(viewLifecycleOwner, Observer {
-            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
-        })
-
-        if (requireContext().isNetworkState()) {
-            viewModel.loadData()
-        } else {
-            Snackbar.make(requireView(), "Can'nt connect Network", Snackbar.LENGTH_LONG).show()
-        }
+        viewModel.loadData()
     }
 
 }

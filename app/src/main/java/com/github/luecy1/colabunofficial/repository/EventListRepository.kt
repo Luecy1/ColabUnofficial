@@ -7,5 +7,15 @@ class EventListRepository(
     private val api: SupporterzColabAPI
 ) {
 
-    suspend fun getEventList(): List<Event> = api.eventList().events
+    suspend fun getEventList(
+        start: Int = 1,
+        order: Int = 1,
+        count: Int = 10
+    ): List<Event> {
+        return api.eventList(
+            start = start,
+            order = order,
+            count = count
+        ).events
+    }
 }

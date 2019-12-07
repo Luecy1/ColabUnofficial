@@ -3,20 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+    <data>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <variable
+            name="viewmodel"
+            type="com.github.luecy1.colabunofficial.ui.EventModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/title"
@@ -25,6 +40,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="0dp"
+                android:text="@{viewmodel.item.title}"
                 android:textAlignment="textStart"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -39,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:background="#43A047"
+                android:text="@{viewmodel.item.date}"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
@@ -53,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
+                android:text="@{viewmodel.item.catchId}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,10 +79,11 @@
 
             <TextView
                 android:id="@+id/description"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
+                android:text="@{viewmodel.item.description}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +95,16 @@
                 android:id="@+id/acceptedAndLimit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{viewmodel.item.acceptedAndLimit}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description"
                 tools:text="50/50 人" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
