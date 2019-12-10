@@ -1,7 +1,6 @@
 package com.github.luecy1.colabunofficial.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +37,17 @@ class EventListFragment : Fragment() {
         val adapter = EventListAdapter()
         eventList.adapter = adapter
 
-        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer {
-            Log.d(TAG, it.toString())
-            adapter.updateEventModels(it.map { it.toEventModel() })
+//        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer {
+//            Log.d(TAG, it.toString())
+//            adapter.submitList(it)
+//
+//        })
+
+        viewModel.repos.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
         })
 
-        viewModel.loadData()
+//        viewModel.loadData()
     }
 
 }
