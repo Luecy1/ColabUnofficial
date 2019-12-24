@@ -45,6 +45,8 @@ class EventListFragment : Fragment() {
 
         viewModel.repos.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+
+            viewModel.loading.postValue(false)
         })
 
 //        viewModel.loadData()

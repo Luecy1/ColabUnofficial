@@ -1,6 +1,5 @@
 package com.github.luecy1.colabunofficial.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.github.luecy1.colabunofficial.model.Event
 import com.github.luecy1.colabunofficial.repository.EventListRepository
-import kotlinx.coroutines.launch
 
 
 class EventListViewModel(
@@ -36,20 +34,20 @@ class EventListViewModel(
         repos = LivePagedListBuilder(factory, 10).build()
     }
 
-    fun loadData() = viewModelScope.launch {
-
-
-        loading.value = true
-        runCatching {
-            eventRepository.getEventList(1)
-        }.onSuccess {
-            _eventLiveData.postValue(it)
-            loading.value = false
-        }.onFailure {
-            _message.value = "Failure"
-
-            loading.value = false
-            Log.e(TAG, "Failure", it)
-        }
-    }
+//    fun loadData() = viewModelScope.launch {
+//
+//
+//        loading.value = true
+//        runCatching {
+//            eventRepository.getEventList(1)
+//        }.onSuccess {
+//            _eventLiveData.postValue(it)
+//            loading.value = false
+//        }.onFailure {
+//            _message.value = "Failure"
+//
+//            loading.value = false
+//            Log.e(TAG, "Failure", it)
+//        }
+//    }
 }

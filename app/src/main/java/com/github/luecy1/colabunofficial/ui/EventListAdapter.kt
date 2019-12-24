@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,8 @@ class EventListAdapter :
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
 
-        val event = eventModel[position]
+//        val event = eventModel[position]
+        val event = getItem(position)
         holder.binding.viewmodel = event
 
         holder.binding.root.setOnClickListener {
@@ -52,6 +54,13 @@ class EventListAdapter :
         override fun areContentsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
             return oldItem.item == newItem.item
         }
+    }
+
+    override fun submitList(pagedList: PagedList<EventModel>?) {
+
+        Log.d(TAG, "hoge")
+
+        super.submitList(pagedList)
     }
 
     class BindingHolder(var binding: EventCardItemBinding) : RecyclerView.ViewHolder(binding.root)
