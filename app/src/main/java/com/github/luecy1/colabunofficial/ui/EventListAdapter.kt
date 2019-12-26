@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.luecy1.colabunofficial.databinding.EventCardItemBinding
 import com.github.luecy1.colabunofficial.util.toMMDD
 
-class EventListAdapter : RecyclerView.Adapter<EventListAdapter.BindingHolder>() {
+class EventListAdapter :
+    PagedListAdapter<EventModel, EventListAdapter.BindingHolder>(RecyclerDiffCallback()) {
 
-    val TAG = javaClass.simpleName
+    private val TAG = javaClass.simpleName
 
     val eventModel: MutableList<EventModel> = mutableListOf()
 
@@ -26,11 +29,10 @@ class EventListAdapter : RecyclerView.Adapter<EventListAdapter.BindingHolder>() 
         return BindingHolder(binding)
     }
 
-    override fun getItemCount(): Int = eventModel.size
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
 
-        val event = eventModel[position]
+        val event = getItem(position)
         holder.binding.viewmodel = event
 
         holder.binding.root.setOnClickListener {
@@ -41,43 +43,23 @@ class EventListAdapter : RecyclerView.Adapter<EventListAdapter.BindingHolder>() 
         holder.binding.executePendingBindings()
     }
 
-    fun updateEventModels(newEventModel: List<EventModel>?) {
-        if (newEventModel != null) {
-            val diff = DiffUtil.calculateDiff(
-                RecyclerDiffCallback(eventModel.toList(), newEventModel), true
-            )
-            eventModel.let {
-                it.clear()
-                it.addAll(newEventModel)
-            }
-            diff.dispatchUpdatesTo(this)
+
+    class RecyclerDiffCallback : DiffUtil.ItemCallback<EventModel>() {
+
+        override fun areItemsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
+            return oldItem.item.title == newItem.item.title
+        }
+
+        override fun areContentsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
+            return oldItem.item == newItem.item
         }
     }
 
-    class RecyclerDiffCallback(
-        private val old: List<EventModel>,
-        private val new: List<EventModel>
-    ) :
-        DiffUtil.Callback() {
+    override fun submitList(pagedList: PagedList<EventModel>?) {
 
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        Log.d(TAG, "hoge")
 
-            val oldItem = old[oldItemPosition]
-            val newItem = new[newItemPosition]
-
-            return oldItem == newItem
-        }
-
-        override fun getOldListSize(): Int = old.size
-
-        override fun getNewListSize(): Int = new.size
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val oldItem = old[oldItemPosition]
-            val newItem = new[newItemPosition]
-
-            return oldItem == newItem
-        }
+        super.submitList(pagedList)
     }
 
     class BindingHolder(var binding: EventCardItemBinding) : RecyclerView.ViewHolder(binding.root)
