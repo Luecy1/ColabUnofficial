@@ -32,7 +32,6 @@ class EventListAdapter :
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
 
-//        val event = eventModel[position]
         val event = getItem(position)
         holder.binding.viewmodel = event
 

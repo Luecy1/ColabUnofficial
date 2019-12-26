@@ -37,19 +37,12 @@ class EventListFragment : Fragment() {
         val adapter = EventListAdapter()
         eventList.adapter = adapter
 
-//        viewModel.eventLiveData.observe(viewLifecycleOwner, Observer {
-//            Log.d(TAG, it.toString())
-//            adapter.submitList(it)
-//
-//        })
-
         viewModel.repos.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
 
             viewModel.loading.postValue(false)
         })
 
-//        viewModel.loadData()
     }
 
 }

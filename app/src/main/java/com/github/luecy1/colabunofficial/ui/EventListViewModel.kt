@@ -11,7 +11,7 @@ import com.github.luecy1.colabunofficial.repository.EventListRepository
 
 
 class EventListViewModel(
-    private val eventRepository: EventListRepository
+    eventRepository: EventListRepository
 ) : ViewModel() {
 
     @Suppress("PrivatePropertyName")
@@ -34,20 +34,4 @@ class EventListViewModel(
         repos = LivePagedListBuilder(factory, 10).build()
     }
 
-//    fun loadData() = viewModelScope.launch {
-//
-//
-//        loading.value = true
-//        runCatching {
-//            eventRepository.getEventList(1)
-//        }.onSuccess {
-//            _eventLiveData.postValue(it)
-//            loading.value = false
-//        }.onFailure {
-//            _message.value = "Failure"
-//
-//            loading.value = false
-//            Log.e(TAG, "Failure", it)
-//        }
-//    }
 }
