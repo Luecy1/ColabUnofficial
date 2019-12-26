@@ -38,6 +38,9 @@ jobs:
       - run:
           name: Generate APK
           command: ./gradlew assembleDebug
+      - store_artifacts:
+          path: app/build/outputs/apk/debug/app-debug.apk
+          destination: apk
       - run:
           name: Upload DeployGate
           command: curl -F "token=${DEPLOY_GATE_API_KEY}" -F "file=@app/build/outputs/apk/debug/app-debug.apk" -F "message=deployed" https://deploygate.com/api/users/Luecy1/apps
