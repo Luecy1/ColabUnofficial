@@ -6,7 +6,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.github.luecy1.colabunofficial.ui.eventlist.EventListFragment
 
 class MainActivityAdapter(
-    fm: FragmentManager
+    fm: FragmentManager,
+    val changeTab: ChangeTabLayoutListener
 ) : FragmentPagerAdapter(
     fm,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
@@ -17,7 +18,10 @@ class MainActivityAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> EventListFragment.newInstance()
-            1 -> SearchEventFragment.newInstance()
+            1 -> {
+                val fragment = SearchEventFragment.newInstance(changeTab)
+                fragment
+            }
             else -> throw IllegalAccessException("Unexpected position->$position")
         }
     }

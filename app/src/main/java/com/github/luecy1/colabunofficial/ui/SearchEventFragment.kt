@@ -6,18 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.luecy1.colabunofficial.R
+import com.github.luecy1.colabunofficial.databinding.FragmentSearchEventBinding
+import com.github.luecy1.colabunofficial.model.SearchCondition
+import com.wada811.databinding.dataBinding
 
-class SearchEventFragment : Fragment() {
+class SearchEventFragment(
+    val changeTabLayout: ChangeTabLayoutListener
+) : Fragment() {
+
+    private val binding: FragmentSearchEventBinding by dataBinding(R.layout.fragment_search_event)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search_event, container, false)
+
+        binding.searchButton.setOnClickListener {
+            val condition = SearchCondition("")
+            changeTabLayout.changeTab(0)
+        }
+
+        return binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = SearchEventFragment()
+        fun newInstance(
+            changeTabLayout: ChangeTabLayoutListener
+        ) = SearchEventFragment(changeTabLayout)
     }
 }

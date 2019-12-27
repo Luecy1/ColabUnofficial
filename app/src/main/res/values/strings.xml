@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ColabUnofficial</string>
     <string name="hello_blank_fragment">not implement yet…</string>
+    <string name="search">Search</string>
 </resources>
