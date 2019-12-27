@@ -1,6 +1,6 @@
 package com.github.luecy1.colabunofficial.ui.eventlist
 
-import androidx.paging.ItemKeyedDataSource
+import androidx.paging.PositionalDataSource
 import com.github.luecy1.colabunofficial.model.SearchCondition
 import com.github.luecy1.colabunofficial.repository.EventListRepository
 import kotlinx.coroutines.CoroutineScope
@@ -11,12 +11,14 @@ class EventDataSource(
     private val scope: CoroutineScope,
     private val repository: EventListRepository,
     private val searchCondition: SearchCondition = defaultCondition()
-) : ItemKeyedDataSource<Int, EventModel>() {
+) : PositionalDataSource<EventModel>() {
 
-    override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<EventModel>
-    ) {
+    override fun invalidate() {
+        super.invalidate()
+        scope.cancel()
+    }
+
+    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<EventModel>) {
 
         scope.launch {
             val items = repository.getEventList(
@@ -25,40 +27,26 @@ class EventDataSource(
                 count = params.requestedLoadSize
             )
 
-            val eventListModel = items.map { it.toEventModel() }
 
-            callback.onResult(eventListModel)
+            val eventListModel = items.events.map { it.toEventModel() }
+
+            callback.onResult(eventListModel, 0, items.resultsAvailable)
         }
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<EventModel>) {
+    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<EventModel>) {
         scope.launch {
-
-            val nextKey = params.key + params.requestedLoadSize
 
             val items = repository.getEventList(
                 params = searchCondition.toMap(),
-                start = nextKey,
-                count = params.requestedLoadSize
+                start = params.startPosition,
+                count = params.loadSize
             )
 
-            val eventListModel = items.map { it.toEventModel() }
+            val eventListModel = items.events.map { it.toEventModel() }
 
             callback.onResult(eventListModel)
         }
-    }
-
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<EventModel>) {
-        // ignore
-    }
-
-    override fun getKey(item: EventModel): Int {
-        return 0
-    }
-
-    override fun invalidate() {
-        super.invalidate()
-        scope.cancel()
     }
 }
 

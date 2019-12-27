@@ -1,7 +1,7 @@
 package com.github.luecy1.colabunofficial.repository
 
 import com.github.luecy1.colabunofficial.api.SupporterzColabAPI
-import com.github.luecy1.colabunofficial.model.Event
+import com.github.luecy1.colabunofficial.model.SupporterzColabResponce
 
 class EventListRepository(
     private val api: SupporterzColabAPI
@@ -12,12 +12,13 @@ class EventListRepository(
         start: Int = 1,
         order: Int = 1,
         count: Int = 10
-    ): List<Event> {
-        return api.eventList(
+    ): SupporterzColabResponce {
+        val responce = api.eventList(
             params = params,
             start = start,
             order = order,
             count = count
-        ).events
+        )
+        return responce
     }
 }
