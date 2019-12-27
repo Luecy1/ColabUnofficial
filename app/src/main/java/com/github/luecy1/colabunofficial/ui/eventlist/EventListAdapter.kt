@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial.ui
+package com.github.luecy1.colabunofficial.ui.eventlist
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +13,9 @@ import com.github.luecy1.colabunofficial.databinding.EventCardItemBinding
 import com.github.luecy1.colabunofficial.util.toMMDD
 
 class EventListAdapter :
-    PagedListAdapter<EventModel, EventListAdapter.BindingHolder>(RecyclerDiffCallback()) {
+    PagedListAdapter<EventModel, EventListAdapter.BindingHolder>(
+        RecyclerDiffCallback()
+    ) {
 
     private val TAG = javaClass.simpleName
 
@@ -26,7 +28,9 @@ class EventListAdapter :
 
         binding.root.layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
-        return BindingHolder(binding)
+        return BindingHolder(
+            binding
+        )
     }
 
 

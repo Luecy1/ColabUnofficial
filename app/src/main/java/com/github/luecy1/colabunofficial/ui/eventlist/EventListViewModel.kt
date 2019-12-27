@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial.ui
+package com.github.luecy1.colabunofficial.ui.eventlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -30,7 +30,11 @@ class EventListViewModel(
     }
 
     init {
-        val factory = EventDataSourceFactory(eventRepository, viewModelScope)
+        val factory =
+            EventDataSourceFactory(
+                eventRepository,
+                viewModelScope
+            )
         repos = LivePagedListBuilder(factory, 10).build()
     }
 

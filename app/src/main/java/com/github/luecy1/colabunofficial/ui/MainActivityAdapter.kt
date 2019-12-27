@@ -3,6 +3,7 @@ package com.github.luecy1.colabunofficial.ui
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.github.luecy1.colabunofficial.ui.eventlist.EventListFragment
 
 class MainActivityAdapter(
     fm: FragmentManager

@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.github.luecy1.colabunofficial.ui.EventModel" />
+            type="com.github.luecy1.colabunofficial.ui.eventlist.EventModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial.ui
+package com.github.luecy1.colabunofficial.ui.eventlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,8 @@ class EventListFragment : Fragment() {
     private val binding: EventListFragmentBinding by dataBinding(R.layout.event_list_fragment)
 
     companion object {
-        fun newInstance() = EventListFragment()
+        fun newInstance() =
+            EventListFragment()
         val TAG: String = EventListFragment::class.java.simpleName
     }
 
@@ -34,7 +35,8 @@ class EventListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val adapter = EventListAdapter()
+        val adapter =
+            EventListAdapter()
         eventList.adapter = adapter
 
         viewModel.repos.observe(viewLifecycleOwner, Observer {

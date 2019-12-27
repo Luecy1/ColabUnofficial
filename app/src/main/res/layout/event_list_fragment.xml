@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.github.luecy1.colabunofficial.ui.EventListViewModel" />
+            type="com.github.luecy1.colabunofficial.ui.eventlist.EventListViewModel" />
     </data>
 
     <FrameLayout

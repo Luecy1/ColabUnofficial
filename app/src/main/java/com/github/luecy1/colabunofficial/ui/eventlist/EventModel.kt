@@ -1,4 +1,4 @@
-package com.github.luecy1.colabunofficial.ui
+package com.github.luecy1.colabunofficial.ui.eventlist
 
 class EventModel(
     val item: Event
