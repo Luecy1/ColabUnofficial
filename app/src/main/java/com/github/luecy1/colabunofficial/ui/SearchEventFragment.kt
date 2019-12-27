@@ -11,7 +11,7 @@ import com.github.luecy1.colabunofficial.model.SearchCondition
 import com.wada811.databinding.dataBinding
 
 class SearchEventFragment(
-    val changeTabLayout: ChangeTabLayoutListener
+    private val changeTab: ChangeTabListener
 ) : Fragment() {
 
     private val binding: FragmentSearchEventBinding by dataBinding(R.layout.fragment_search_event)
@@ -23,7 +23,7 @@ class SearchEventFragment(
 
         binding.searchButton.setOnClickListener {
             val condition = SearchCondition("")
-            changeTabLayout.changeTab(0)
+            changeTab.changeTab(0)
         }
 
         return binding.root
@@ -32,7 +32,7 @@ class SearchEventFragment(
     companion object {
         @JvmStatic
         fun newInstance(
-            changeTabLayout: ChangeTabLayoutListener
-        ) = SearchEventFragment(changeTabLayout)
+            changeTab: ChangeTabListener
+        ) = SearchEventFragment(changeTab)
     }
 }

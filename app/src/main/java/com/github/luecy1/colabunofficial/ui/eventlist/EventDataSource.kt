@@ -1,6 +1,7 @@
 package com.github.luecy1.colabunofficial.ui.eventlist
 
 import androidx.paging.ItemKeyedDataSource
+import com.github.luecy1.colabunofficial.model.SearchCondition
 import com.github.luecy1.colabunofficial.repository.EventListRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
@@ -8,7 +9,8 @@ import kotlinx.coroutines.launch
 
 class EventDataSource(
     private val scope: CoroutineScope,
-    private val repository: EventListRepository
+    private val repository: EventListRepository,
+    private val searchCondition: SearchCondition = defaultCondition()
 ) : ItemKeyedDataSource<Int, EventModel>() {
 
     override fun loadInitial(
@@ -18,7 +20,9 @@ class EventDataSource(
 
         scope.launch {
             val items = repository.getEventList(
-                start = params.requestedLoadSize
+                params = searchCondition.toMap(),
+                start = 1,
+                count = params.requestedLoadSize
             )
 
             val eventListModel = items.map { it.toEventModel() }
@@ -29,8 +33,13 @@ class EventDataSource(
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<EventModel>) {
         scope.launch {
+
+            val nextKey = params.key + params.requestedLoadSize
+
             val items = repository.getEventList(
-                start = params.requestedLoadSize
+                params = searchCondition.toMap(),
+                start = nextKey,
+                count = params.requestedLoadSize
             )
 
             val eventListModel = items.map { it.toEventModel() }
@@ -51,4 +60,10 @@ class EventDataSource(
         super.invalidate()
         scope.cancel()
     }
+}
+
+fun defaultCondition(): SearchCondition {
+    return SearchCondition(
+        keyword = "Kotlin"
+    )
 }

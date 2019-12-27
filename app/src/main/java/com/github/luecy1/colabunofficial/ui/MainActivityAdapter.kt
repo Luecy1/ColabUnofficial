@@ -7,7 +7,7 @@ import com.github.luecy1.colabunofficial.ui.eventlist.EventListFragment
 
 class MainActivityAdapter(
     fm: FragmentManager,
-    val changeTab: ChangeTabLayoutListener
+    private val changeTab: ChangeTabListener
 ) : FragmentPagerAdapter(
     fm,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT

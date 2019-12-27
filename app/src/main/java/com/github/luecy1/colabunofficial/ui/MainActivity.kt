@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.luecy1.colabunofficial.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ChangeTabLayoutListener {
+class MainActivity : AppCompatActivity(), ChangeTabListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

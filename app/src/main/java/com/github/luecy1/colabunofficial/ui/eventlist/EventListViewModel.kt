@@ -11,7 +11,7 @@ import com.github.luecy1.colabunofficial.repository.EventListRepository
 
 
 class EventListViewModel(
-    eventRepository: EventListRepository
+    val eventRepository: EventListRepository
 ) : ViewModel() {
 
     @Suppress("PrivatePropertyName")
@@ -30,6 +30,15 @@ class EventListViewModel(
     }
 
     init {
+        val factory =
+            EventDataSourceFactory(
+                eventRepository,
+                viewModelScope
+            )
+        repos = LivePagedListBuilder(factory, 10).build()
+    }
+
+    fun changeSearchCondition() {
         val factory =
             EventDataSourceFactory(
                 eventRepository,
