@@ -30,11 +30,11 @@ data class Event(
     @Json(name = "event_type")
     val eventType: String,
 
-    val series: Series,
+    val series: Series?,
 
-    val address: String,
+    val address: String?,
 
-    val place: String,
+    val place: String?,
 
     val lat: String?,
 
