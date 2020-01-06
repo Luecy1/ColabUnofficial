@@ -3,15 +3,18 @@ package com.github.luecy1.colabunofficial.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.luecy1.colabunofficial.R
+import com.github.luecy1.colabunofficial.model.SearchCondition
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ChangeTabListener {
+class MainActivity : AppCompatActivity(), SearchListener {
+
+    lateinit var adapter: MainActivityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = MainActivityAdapter(supportFragmentManager, this)
+        adapter = MainActivityAdapter(supportFragmentManager, this)
 
         viewPager.offscreenPageLimit = 2
         viewPager.adapter = adapter
@@ -22,7 +25,8 @@ class MainActivity : AppCompatActivity(), ChangeTabListener {
         tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_search_black_24dp)
     }
 
-    override fun changeTab(item: Int) {
-        viewPager.setCurrentItem(item, true)
+    override fun changeTab(searchCondition: SearchCondition) {
+        viewPager.setCurrentItem(0, true)
+        adapter.search(searchCondition)
     }
 }

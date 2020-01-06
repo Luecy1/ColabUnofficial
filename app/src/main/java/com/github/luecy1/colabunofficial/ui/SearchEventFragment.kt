@@ -14,7 +14,7 @@ import java.util.*
 
 
 class SearchEventFragment(
-    private val changeTab: ChangeTabListener
+    private val search: SearchListener
 ) : Fragment() {
 
     private val binding: FragmentSearchEventBinding by dataBinding(R.layout.fragment_search_event)
@@ -26,7 +26,7 @@ class SearchEventFragment(
 
         binding.searchButton.setOnClickListener {
             val condition = SearchCondition("")
-            changeTab.changeTab(0)
+            search.changeTab(condition)
         }
 
         binding.date.setOnFocusChangeListener { _, hasFocus ->
@@ -61,7 +61,7 @@ class SearchEventFragment(
     companion object {
         @JvmStatic
         fun newInstance(
-            changeTab: ChangeTabListener
-        ) = SearchEventFragment(changeTab)
+            search: SearchListener
+        ) = SearchEventFragment(search)
     }
 }

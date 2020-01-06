@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.github.luecy1.colabunofficial.model.Event
+import com.github.luecy1.colabunofficial.model.SearchCondition
 import com.github.luecy1.colabunofficial.repository.EventListRepository
 
 
@@ -38,7 +39,7 @@ class EventListViewModel(
         repos = LivePagedListBuilder(factory, 10).build()
     }
 
-    fun changeSearchCondition() {
+    fun changeSearchCondition(searchCondition: SearchCondition) {
         val factory =
             EventDataSourceFactory(
                 eventRepository,

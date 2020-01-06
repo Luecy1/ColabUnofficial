@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.luecy1.colabunofficial.R
 import com.github.luecy1.colabunofficial.databinding.EventListFragmentBinding
+import com.github.luecy1.colabunofficial.model.SearchCondition
 import com.wada811.databinding.dataBinding
 import kotlinx.android.synthetic.main.event_list_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -21,6 +22,7 @@ class EventListFragment : Fragment() {
     companion object {
         fun newInstance() =
             EventListFragment()
+
         val TAG: String = EventListFragment::class.java.simpleName
     }
 
@@ -45,6 +47,10 @@ class EventListFragment : Fragment() {
             viewModel.loading.postValue(false)
         })
 
+    }
+
+    fun search(searchCondition: SearchCondition) {
+        viewModel.changeSearchCondition(searchCondition)
     }
 
 }
