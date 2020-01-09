@@ -34,7 +34,8 @@ class EventListViewModel(
         val factory =
             EventDataSourceFactory(
                 eventRepository,
-                viewModelScope
+                viewModelScope,
+                defaultCondition()
             )
         repos = LivePagedListBuilder(factory, 10).build()
     }
@@ -43,7 +44,8 @@ class EventListViewModel(
         val factory =
             EventDataSourceFactory(
                 eventRepository,
-                viewModelScope
+                viewModelScope,
+                searchCondition
             )
         repos = LivePagedListBuilder(factory, 10).build()
     }
