@@ -25,7 +25,10 @@ class SearchEventFragment(
     ): View? {
 
         binding.searchButton.setOnClickListener {
-            val condition = SearchCondition("")
+
+            val keyword = binding.textInputLayout.editText?.text.toString()
+
+            val condition = SearchCondition(keyword = keyword)
             search.changeTab(condition)
         }
 

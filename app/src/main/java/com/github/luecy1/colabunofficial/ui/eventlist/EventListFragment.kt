@@ -19,9 +19,10 @@ class EventListFragment : Fragment() {
 
     private val binding: EventListFragmentBinding by dataBinding(R.layout.event_list_fragment)
 
+    val adapter = EventListAdapter()
+
     companion object {
-        fun newInstance() =
-            EventListFragment()
+        fun newInstance() = EventListFragment()
 
         val TAG: String = EventListFragment::class.java.simpleName
     }
@@ -37,8 +38,6 @@ class EventListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val adapter =
-            EventListAdapter()
         eventList.adapter = adapter
 
         viewModel.repos.observe(viewLifecycleOwner, Observer {
@@ -50,7 +49,16 @@ class EventListFragment : Fragment() {
     }
 
     fun search(searchCondition: SearchCondition) {
+
+        viewModel.loading.value = true
+
         viewModel.changeSearchCondition(searchCondition)
+
+        viewModel.repos.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+
+            viewModel.loading.postValue(false)
+        })
     }
 
 }
